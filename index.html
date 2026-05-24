@@ -5,57 +5,71 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 <title>梅花易数</title>
 <style>
-:root{--bg:#1a1525;--card:#241e35;--gold:#d4a574;--red:#e74c3c;--green:#2ecc71;--text:#e8e0d8;--muted:#8a8098}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
+:root{--bg:#0f0c1e;--card:rgba(255,255,255,0.04);--gold:#c9a96e;--red:#e05555;--green:#5cb87a;--text:#ddd6c8;--muted:#8a806e;--border:rgba(201,169,110,0.2)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'PingFang SC','Hiragino Sans GB',sans-serif;min-height:100vh;padding:1rem}
-h1{text-align:center;font-size:1.6rem;color:var(--gold);margin:1.2rem 0 0.3rem;letter-spacing:0.15em}
-.sub{text-align:center;color:var(--muted);font-size:0.85rem;margin-bottom:1.5rem}
-.input-group{display:flex;gap:0.6rem;justify-content:center;margin-bottom:1rem;flex-wrap:wrap}
-.input-group input{width:70px;padding:0.8rem 0;text-align:center;font-size:1.3rem;background:var(--card);border:2px solid #3a3150;border-radius:12px;color:var(--gold);outline:none}
-.input-group input:focus{border-color:var(--gold)}
-.btn{display:block;margin:0 auto 1.2rem;padding:0.8rem 2.5rem;background:var(--gold);color:var(--bg);border:none;border-radius:12px;font-size:1.1rem;font-weight:700;cursor:pointer}
-.btn:active{opacity:0.85}
-.result{display:none}
-.card{background:var(--card);border-radius:14px;padding:1.2rem;margin:0.8rem 0;border-left:3px solid var(--gold)}
-.card h3{color:var(--gold);font-size:1rem;margin-bottom:0.8rem}
-.gua-row{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;margin:0.5rem 0}
-.gua-box{background:rgba(212,165,116,0.12);padding:0.5rem 1rem;border-radius:10px;text-align:center;min-width:90px}
-.gua-box .name{color:var(--gold);font-size:1.15rem;font-weight:700}
-.gua-box .sub{font-size:0.72rem;color:var(--muted);margin:0}
-.gua-box .wuxing{font-size:0.72rem;color:var(--muted)}
-.arrow-row{text-align:center;color:var(--gold);font-size:1.3rem;padding:0.2rem 0}
-.tag{display:inline-block;padding:0.25rem 0.7rem;border-radius:8px;font-size:0.82rem;margin:0.2rem}
-.bad{background:rgba(231,76,60,0.15);color:var(--red)}
-.good{background:rgba(46,204,113,0.15);color:var(--green)}
-.neutral{background:rgba(212,165,116,0.15);color:var(--gold)}
-.summary{text-align:center;padding:1.2rem;line-height:2}
-.summary .verdict{font-size:1.6rem;font-weight:700;margin-bottom:0.3rem}
-.summary .detail{color:var(--muted);font-size:0.88rem}
-footer{text-align:center;padding:2rem 0 1rem;color:var(--muted);font-size:0.75rem}
+body{background:linear-gradient(180deg,#0a0820 0%,#16102a 40%,#1a1430 100%);color:var(--text);font-family:'Noto Serif SC','STSong',serif;min-height:100vh;padding:1.2rem 1rem}
+.header{text-align:center;padding:2rem 0 0.5rem}
+.header .icon{font-size:2.8rem;margin-bottom:0.3rem}
+.header h1{font-size:1.5rem;color:var(--gold);font-weight:400;letter-spacing:0.3em}
+.header .line{width:40px;height:1px;background:var(--gold);margin:0.8rem auto 0}
+.subtitle{text-align:center;color:var(--muted);font-size:0.8rem;margin:0.8rem 0 2rem;letter-spacing:0.1em}
+.input-area{display:flex;gap:0.8rem;justify-content:center;margin-bottom:1.5rem}
+.input-area .box{text-align:center}
+.input-area .box .label{color:var(--muted);font-size:0.72rem;margin-bottom:0.4rem;letter-spacing:0.1em}
+.input-area input{width:72px;height:72px;border-radius:50%;text-align:center;font-size:1.5rem;background:var(--card);border:1.5px solid var(--border);color:var(--gold);outline:none;font-family:inherit;-webkit-appearance:none}
+.input-area input:focus{border-color:var(--gold);box-shadow:0 0 20px rgba(201,169,110,0.15)}
+.btn{display:block;margin:0 auto 2rem;padding:0.8rem 0;width:200px;text-align:center;background:linear-gradient(135deg,rgba(201,169,110,0.2),rgba(201,169,110,0.08));border:1px solid var(--gold);border-radius:30px;color:var(--gold);font-size:1rem;font-family:inherit;letter-spacing:0.2em;cursor:pointer}
+.btn:active{background:rgba(201,169,110,0.35)}
+.result{display:none;max-width:420px;margin:0 auto}
+.section{border:1px solid var(--border);border-radius:16px;padding:1rem 1.2rem;margin-bottom:0.8rem;background:var(--card)}
+.section .title{color:var(--gold);font-size:0.82rem;letter-spacing:0.15em;margin-bottom:0.8rem;text-align:center}
+.gua-line{display:flex;align-items:center;justify-content:center;gap:1rem;margin:0.6rem 0;flex-wrap:wrap}
+.gua-node{text-align:center;min-width:80px}
+.gua-node .n{color:var(--text);font-size:1.15rem;font-weight:700}
+.gua-node .d{color:var(--muted);font-size:0.7rem}
+.arr{color:var(--gold);font-size:1rem}
+.tags{text-align:center;margin:0.6rem 0;line-height:2.2}
+.tag{display:inline-block;padding:0.3rem 1rem;border-radius:20px;font-size:0.8rem;margin:0.15rem 0.2rem}
+.tag-body{background:rgba(201,169,110,0.12);color:var(--gold)}
+.tag-use{color:var(--red);background:rgba(224,85,85,0.1)}
+.tag-gi{background:rgba(92,184,122,0.1);color:var(--green)}
+.tag-bad{background:rgba(224,85,85,0.1);color:var(--red)}
+.tag-neutral{background:rgba(138,128,110,0.1);color:var(--muted)}
+.tag-sm{font-size:0.7rem;padding:0.2rem 0.7rem}
+.verdict{text-align:center;padding:1.5rem 1rem}
+.verdict .icon{font-size:2rem}
+.verdict .main{font-size:1.4rem;font-weight:700;margin:0.5rem 0;letter-spacing:0.1em}
+.verdict .sub{font-size:0.8rem;color:var(--muted);line-height:1.8}
+.footer{text-align:center;padding:2rem 0 1rem;color:var(--muted);font-size:0.65rem;letter-spacing:0.1em}
 </style>
 </head>
 <body>
-<h1>🪷 梅花易数</h1>
-<p class="sub">报三个数字 · 即时起卦</p>
-<div class="input-group">
-  <input type="number" id="a" placeholder="数1" min="1" inputmode="numeric">
-  <input type="number" id="b" placeholder="数2" min="1" inputmode="numeric">  
-  <input type="number" id="c" placeholder="数3" min="1" inputmode="numeric">
+<div class="header">
+<div class="icon">🪷</div>
+<h1>梅花易数</h1>
+<div class="line"></div>
 </div>
+<p class="subtitle">报三个数字 · 以数起卦</p>
+
+<div class="input-area">
+<div class="box"><div class="label">数 一</div><input type="number" id="a" min="1" inputmode="numeric"></div>
+<div class="box"><div class="label">数 二</div><input type="number" id="b" min="1" inputmode="numeric"></div>
+<div class="box"><div class="label">数 三</div><input type="number" id="c" min="1" inputmode="numeric"></div>
+</div>
+
 <button class="btn" onclick="go()">起 卦</button>
+
 <div class="result" id="r"></div>
-<footer>严格依据邵雍《梅花易数》原著 · 2026</footer>
+
+<div class="footer">邵雍《梅花易数》· 先天八卦 · 体用生克</div>
+
 <script>
-// 先天八卦数
-const GS={1:{n:'乾☰',w:'金',t:'天·父·头·金玉'},2:{n:'兑☱',w:'金',t:'泽·少女·口·刀剪'},
-3:{n:'离☲',w:'火',t:'火·中女·眼·书画'},4:{n:'震☳',w:'木',t:'雷·长男·足·车'},
-5:{n:'巽☴',w:'木',t:'风·长女·股·绳索'},6:{n:'坎☵',w:'水',t:'水·中男·耳·酒'},
-7:{n:'艮☶',w:'土',t:'山·少男·手·石门'},8:{n:'坤☷',w:'土',t:'地·母·腹·布'}};
-
-// 爻序: 0=阴 1=阳, 从下往上 (LSB=第1爻)
+const G={1:{n:'乾 ☰',w:'金',x:'天·父·头·金玉'},2:{n:'兑 ☱',w:'金',x:'泽·少女·口·刀剪'},
+3:{n:'离 ☲',w:'火',x:'火·中女·眼·书画'},4:{n:'震 ☳',w:'木',x:'雷·长男·足·车'},
+5:{n:'巽 ☴',w:'木',x:'风·长女·股·绳索'},6:{n:'坎 ☵',w:'水',x:'水·中男·耳·酒'},
+7:{n:'艮 ☶',w:'土',x:'山·少男·手·石门'},8:{n:'坤 ☷',w:'土',x:'地·母·腹·布'}};
 const GY={1:[1,1,1],2:[1,1,0],3:[1,0,1],4:[1,0,0],5:[0,1,1],6:[0,1,0],7:[0,0,1],8:[0,0,0]};
-
-// 卦名: (上卦,下卦)
 const GN={};
 ['乾为天','泽天夬','火天大有','雷天大壮','风天小畜','水天需','山天大畜','地天泰',
  '天泽履','兑为泽','火泽睽','雷泽归妹','风泽中孚','水泽节','山泽损','地泽临',
@@ -64,102 +78,67 @@ const GN={};
  '天风姤','泽风大过','火风鼎','雷风恒','巽为风','水风井','山风蛊','地风升',
  '天水讼','泽水困','火水未济','雷水解','风水涣','坎为水','山水蒙','地水师',
  '天山遁','泽山咸','火山旅','雷山小过','风山渐','水山蹇','艮为山','地山谦',
- '天地否','泽地萃','火地晋','雷地豫','风地观','水地比','山地剥','坤为地'].forEach((n,i)=>{
-  let sh=Math.floor(i/8)+1, xi=i%8+1;
-  GN[sh+','+xi]=n;
+ '天地否','泽地萃','火地晋','雷地豫','风地观','水地比','山地剥','坤为地'].forEach((nm,i)=>{
+  GN[(Math.floor(i/8)+1)+','+(i%8+1)]=nm;
 });
-
-// 生克
-const SK_MAP={
-  '金水':['体生用','⚠️'],'金木':['体克用','✅'],'金火':['用克体','❌'],'金土':['用生体','✅'],'金金':['比和','➖'],
-  '水木':['用生体','✅'],'水火':['体克用','✅'],'水土':['用克体','❌'],'水金':['用生体','✅'],'水水':['比和','➖'],
-  '木火':['体生用','⚠️'],'木土':['体克用','✅'],'木金':['用克体','❌'],'木水':['体生用','⚠️'],'木木':['比和','➖'],
-  '火土':['体生用','⚠️'],'火金':['体克用','✅'],'火水':['用克体','❌'],'火木':['用生体','✅'],'火火':['比和','➖'],
-  '土金':['体生用','⚠️'],'土水':['体克用','✅'],'土木':['用克体','❌'],'土火':['用生体','✅'],'土土':['比和','➖']
+const SK={
+  '金水':['体生用','⚠'],'金木':['体克用','✓'],'金火':['用克体','✗'],'金土':['用生体','✓'],'金金':['比和','○'],
+  '水木':['用生体','✓'],'水火':['体克用','✓'],'水土':['用克体','✗'],'水金':['用生体','✓'],'水水':['比和','○'],
+  '木火':['体生用','⚠'],'木土':['体克用','✓'],'木金':['用克体','✗'],'木水':['体生用','⚠'],'木木':['比和','○'],
+  '火土':['体生用','⚠'],'火金':['体克用','✓'],'火水':['用克体','✗'],'火木':['用生体','✓'],'火火':['比和','○'],
+  '土金':['体生用','⚠'],'土水':['体克用','✓'],'土木':['用克体','✗'],'土火':['用生体','✓'],'土土':['比和','○']
 };
-const REL_TAG={'体克用':'good','用生体':'good','比和':'neutral','体生用':'bad','用克体':'bad'};
+const WS={'金':{火:'死'},'木':{火:'休'},'水':{火:'囚'},'火':{火:'旺'},'土':{火:'相'}};
+function sk(a,b){return SK[G[a].w+G[b].w]||['?','?']}
+function gn(sh,xi){return GN[sh+','+xi]||G[sh].n+G[xi].n}
+function ws(w){return WS[w]['火']}
+function fg(arr){for(let i=1;i<=8;i++)if(GY[i].every((v,j)=>v===arr[j]))return i;return 8}
 
-function sk(a,b){let k=GS[a].w+GS[b].w;return SK_MAP[k]||['?','?']}
-function gNO(sh,xi){return GN[sh+','+xi]||(GS[sh].n+GS[xi].n)}
-
-// 旺衰: 当前巳月夏火旺
-const WS_MAP={
-  '金':{火:'死',木:'囚',水:'休',土:'相'},'木':{火:'休',木:'旺',水:'相',金:'死'},
-  '水':{火:'囚',木:'休',水:'旺',土:'死'},'火':{火:'旺',木:'相',水:'囚',金:'死'},
-  '土':{火:'相',木:'囚',水:'死',土:'旺'}
-};
-function ws(w){return WS_MAP[w]['火']}
+function tagClass(rel){return rel.includes('用生')||rel.includes('体克')?'tag-gi':rel.includes('用克')||rel.includes('体生')?'tag-bad':'tag-neutral'}
+function vedIcon(rel){return rel.includes('用生')?'✅':rel.includes('体克')?'⚡':rel.includes('用克')?'❌':rel.includes('体生')?'⚠️':'➖'}
 
 function go(){
-  let a=parseInt(document.getElementById('a').value);
-  let b=parseInt(document.getElementById('b').value);
-  let c=parseInt(document.getElementById('c').value);
+  let a=+document.getElementById('a').value,b=+document.getElementById('b').value,c=+document.getElementById('c').value;
   if(!a||!b||!c){alert('三个数都要填');return}
-
-  let sh=a%8||8, xi=b%8||8, dy=c%6||6;
-  
-  // 全六爻 从下往上
+  let sh=a%8||8,xi=b%8||8,dy=c%6||6;
   let hex=[...GY[xi],...GY[sh]];
-  
-  // 体用
   let ti,yo,ti_n,yo_n;
   if(dy<=3){ti=sh;yo=xi;ti_n='上';yo_n='下'}else{ti=xi;yo=sh;ti_n='下';yo_n='上'}
-  
-  // 变卦
-  let vhex=[...hex]; vhex[dy-1]=vhex[dy-1]?0:1;
-  function findG(arr){for(let i=1;i<=8;i++)if(GY[i].every((v,j)=>v===arr[j]))return i;return 8}
-  let vxi_n=findG(vhex.slice(0,3)), vsh_n=findG(vhex.slice(3,6));
-  
-  // 互卦
-  let hxi_n=findG(hex.slice(1,4)), hsh_n=findG(hex.slice(2,5));
-  
-  let bn=gNO(sh,xi), hn=gNO(hsh_n,hxi_n), vn=gNO(vsh_n,vxi_n);
-  
-  let [rel,emo]=sk(ti,yo);
-  let ts=ws(GS[ti].w), ys=ws(GS[yo].w);
-  
-  // 互卦对体
-  let [hr1,]=sk(ti,hsh_n), [hr2,]=sk(ti,hxi_n);
-  // 变卦对体
-  let [vr1,]=sk(ti,vsh_n), [vr2,]=sk(ti,vxi_n);
-  
-  // 颜色
-  let tc=rel.includes('体克')||rel.includes('用生')?'good':rel.includes('比和')?'neutral':'bad';
-  let ved=rel.includes('用生')||rel.includes('体克')?'✅ 顺利':rel.includes('比和')?'➖ 平稳':rel.includes('用克')?'❌ 有压力':'⚠️ 需出力';
-  
+  let vhex=[...hex];vhex[dy-1]=vhex[dy-1]?0:1;
+  let vxi=fg(vhex.slice(0,3)),vsh=fg(vhex.slice(3,6));
+  let hxi=fg(hex.slice(1,4)),hsh=fg(hex.slice(2,5));
+  let bn=gn(sh,xi),hn=gn(hsh_n=hsh,hxi_n=hxi),vn=gn(vsh_n=vsh,vxi_n=vxi);
+  let [r,emo]=sk(ti,yo),ts=ws(G[ti].w),ys=ws(G[yo].w);
+  let btag=tagClass(r);
+
   document.getElementById('r').innerHTML=`
-<div class="card"><h3>📐 起卦</h3>
-<div class="gua-row">
-<div class="gua-box"><div class="sub">上卦</div><div class="name">${GS[sh].n}</div><div class="wuxing">${GS[sh].w} · 数${sh}</div></div>
-<div class="gua-box"><div class="sub">下卦</div><div class="name">${GS[xi].n}</div><div class="wuxing">${GS[xi].w} · 数${xi}</div></div>
-<div class="gua-box"><div class="sub">动爻</div><div class="name" style="color:var(--gold)">第${dy}爻</div><div class="wuxing">${dy<=3?'下卦为用':'上卦为用'}</div></div>
-</div></div>
-
-<div class="card"><h3>🔮 卦象</h3>
-<div class="gua-row">
-<div class="gua-box"><div class="sub">本卦</div><div class="name">${bn}</div></div>
-<span style="color:var(--gold);align-self:center">→</span>
-<div class="gua-box"><div class="sub">互卦</div><div class="name">${hn}</div></div>
-<span style="color:var(--gold);align-self:center">→</span>
-<div class="gua-box"><div class="sub">变卦</div><div class="name">${vn}</div></div>
-</div></div>
-
-<div class="card"><h3>⚖️ 体用 · 巳月(夏·火旺)</h3>
-<div style="text-align:center">
-<span class="tag ${REL_TAG[rel]}">体:${GS[ti].n}(${GS[ti].w}) · ${ti_n}卦 · ${ts}</span>
-<span style="margin:0 0.4rem;color:var(--muted)">·</span>
-<span class="tag ${REL_TAG[rel]}">${rel} ${emo}</span>
-<span style="margin:0 0.4rem;color:var(--muted)">·</span>
-<span class="tag ${REL_TAG[rel]}">用:${GS[yo].n}(${GS[yo].w}) · ${yo_n}卦 · ${ys}</span>
+<div class="section">
+  <div class="title">卦 象 演 变</div>
+  <div class="gua-line">
+    <div class="gua-node"><div class="n">${bn}</div><div class="d">本卦</div></div>
+    <div class="arr">→</div>
+    <div class="gua-node"><div class="n">${hn}</div><div class="d">互卦</div></div>
+    <div class="arr">→</div>
+    <div class="gua-node"><div class="n">${vn}</div><div class="d">变卦</div></div>
+  </div>
 </div>
-<div style="text-align:center;font-size:0.8rem;color:var(--muted);margin-top:0.6rem">
-互卦:${hr1}/${hr2} · 变卦:${vr1}/${vr2}
-</div></div>
 
-<div class="summary">
-<div class="verdict" style="color:${tc==='good'?'var(--green)':tc==='bad'?'var(--red)':'var(--gold)'}">${ved}</div>
-<div class="detail">${bn} → ${hn} → ${vn}</div>
-<div class="detail" style="margin-top:0.5rem">体${GS[ti].t.split('·').slice(0,2).join(' ')} | 用${GS[yo].t.split('·').slice(0,2).join(' ')}</div>
+<div class="section">
+  <div class="title">体 用 生 克 · 巳月</div>
+  <div class="tags">
+    <span class="tag tag-body">体 · ${G[ti].n} ${G[ti].w} · ${ti_n}卦 · ${ts}</span>
+    <span class="tag ${btag}">${r} ${emo}</span>
+    <span class="tag tag-body">用 · ${G[yo].n} ${G[yo].w} · ${yo_n}卦 · ${ys}</span>
+  </div>
+  <div style="text-align:center;font-size:0.7rem;color:var(--muted);margin-top:0.3rem">
+  互卦对体: ${sk(ti,hsh_n)[0]} / ${sk(ti,hxi_n)[0]}　变卦对体: ${sk(ti,vsh_n)[0]} / ${sk(ti,vxi_n)[0]}
+  </div>
+</div>
+
+<div class="verdict">
+  <div class="icon">${vedIcon(r)}</div>
+  <div class="main" style="color:${btag.includes('gi')?'var(--green)':btag.includes('bad')?'var(--red)':'var(--gold)'}">${r}</div>
+  <div class="sub">${bn} → ${hn} → ${vn}</div>
 </div>`;
   document.getElementById('r').style.display='block';
   document.getElementById('r').scrollIntoView({behavior:'smooth'});
